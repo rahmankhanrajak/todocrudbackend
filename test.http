@@ -28,7 +28,9 @@ Content-Type: application/json
 ### ===============================
 ### SET ACCESS TOKEN (MANUAL)
 ### ===============================
-@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc2Mjg5OSwiZXhwIjoxNzY3NzYyOTU5fQ.RkFv4nYqBARapQgzW4DfwSrGr7Z3dRX2IkUTph86KrDwcpErxnUwQ0MUrZrhRGHzOBm4HJx_rTxlcbgleL0u_YMzkkz_cVgek6RR7Hd0-Bi0Dp4yfCb1r9Kw5mf5JVECJKsZFQxfhe-HwS3LkF81bEXf4pi3lLA6B-eNQ_v-uwd1-YnlVYcgPvYHh9yZik_FPdwNKFrmlMa3v_MlnIsUY3msV9AHeD9iHAOTiheft56_9fN9UA2eGC-oKSbk3YyDVDEPQQBBsvdy7-xdKgaw4NxwdoXMhFPzxacVQL1VxAgSMQUF4_zsD5nd56WxXguoVuGHYi6EbpzaO-_nS8neKw
+@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc4NzU3MSwiZXhwIjoxNzY3Nzg3NjMxfQ.NxSAqjV29hr1dgr1Jim10y4JSeYCA2EyiGcXXt-qP5hU45s8eNmoSfOhz5_fsXGF7jZuVfQRwdOd_EegHk-5N7UygfLcubUy_SYs7K0AUXXB8FMgPofJgUeFqcYVUZRY9mjcXLaT_sF8akwP8szaodqhaOeaXkcxWs6tdevtPxlxUsEs7dRp9R58taupGUHJ8rn19m8EpE-kxO-gLwVCMTE7ClPDWW8MH8-in0qOSKxXSyEV97AtrG5SlRtykgdK_cluLNMxtvGLomDHiS6Gupx8cfB8evTiAOp5FSjKrqGR32bbHtrEzh-eFOIae_i4Ai8D68AgOfvdefo1HG6wMQ
+
+
 ### GET ALL TODOS (VERIFY ACCESS TOKEN)
 ### ===============================
 GET {{baseUrl}}/todos
@@ -77,7 +79,7 @@ Authorization: Bearer {{accessToken}}
 # No headers
 # No body
 POST {{baseUrl}}/api/auth/refresh
-Cookie: refreshToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc2MjY3MCwiZXhwIjoxNzY3NzYzMDkwfQ.pMEN5pjNr4kK2Vc7IMvnoX5O8SLy61xFaeFN3zcD1Ytz5CaJXIWUuZMIz3mphgeXlYMQWsKxFphT1feTCmZzRPHW3f5ppHUHNZLgO4T2mPj7063u0Ql4BGf1B1jaDrSuGzY0xjNUUS2CEqmx8KdQWmVXtDgit2UYLZmEoSSKVpU8FHp8nDD6WbKLtu2j7jwiefK3J8php-LnTsNjm7-KV83GC9nF5MlNcJypmphz_ltTufRaLzYAS-tDTcMenOpVSXhzVuMD1-jpAc3hUeveJFdvewzjh5emy-uBFPgiI-uN2XEHMZxTNg-zj4EbTTc98cKbX1O3TVrTCOO3y-t2lQ
+Cookie: refreshToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc4NzAzNywiZXhwIjoxNzY3Nzg3NDU3fQ.IEOsOdn_I2TRE2AXR2Kry-R-36mg3w8m95z31EeOL_4rsbeQWqefwZIF38aah5-up1EFAjoVApUm7ZeeXY8cNIyKc0pisjnd_sJgLw3vl5DhnKd4uBTSB9nDLg9CPdp2L6JkQYADBkzCzffXnHLi6CkFtgj4QBcpI_5f1SHI6Tsr6sM8AJdCOaloFFVJfIoOVDWaxlneskI0j6TVD0o00Rjh5g2XzJ7BZbHXhGEX78VHWxIzij2S4nEZFNO2znJwEMsmypGqJ__kjBy9sPtV376EVHoJSNEi9dARrAgjteCCLF4Oe3W9fMpOTLzlyBMwEMIlX_RYgnHKjQHPbOrV-w
 
 ### ===============================
 ### LOGOUT (INVALIDATES REFRESH TOKEN)

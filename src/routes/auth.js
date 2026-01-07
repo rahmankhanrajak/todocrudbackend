@@ -96,119 +96,59 @@ console.log("Refresh session stored:", session.id);
   }
 });
 
-router.post("/refresh", async (req, res) => {
-  try {
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.sendStatus(401);
-
-    const decoded = verifyRefreshToken(refreshToken);
-
-    const session = await prisma.refreshSession.findFirst({
-      where: {
-        refreshToken,
-        revokedAt: null,
-        userId: decoded.userId,
-      },
-      include: { user: true },
-    });
-
-    if (!session) return res.sendStatus(403);
-
-    await prisma.refreshSession.update({
-      where: { id: session.id },
-      data: { revokedAt: new Date() },
-    });
-
-    const newRefreshToken = generateRefreshToken({
-      userId: session.user.id,
-    });
-
-    await prisma.refreshSession.create({
-      data: {
-        userId: session.user.id,
-        refreshToken: newRefreshToken,
-      },
-    });
-
-    const newAccessToken = generateAccessToken({
-      userId: session.user.id,
-    });
-
-    res.cookie("refreshToken", newRefreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      // path: "/api/auth/refresh",
-    });
-
-    res.json({
-      accessToken: newAccessToken,
-      user: {
-        id: session.user.id,
-        name: session.user.name,
-        email: session.user.email,
-      },
-    });
-  } catch (err) {
-    return res.sendStatus(403);
-  }
-});
-
-
-router.post("/logout", async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-
-  if (refreshToken) {
-    await prisma.refreshSession.updateMany({
-      where: { refreshToken },
-      data: { revokedAt: new Date() },
-    });
-  }
-
-  res.clearCookie("refreshToken", {
-    path: "/",
-    // path: "/api/auth/refresh",
-  });
-
-  res.sendStatus(204);
-});
-
-
-
-
-
-
-
 // router.post("/refresh", async (req, res) => {
-//   console.log("Cookies in refresh:", req.cookies);
-
-//   const refreshToken = req.cookies.refreshToken;
-//   if (!refreshToken) return res.sendStatus(401);
-
 //   try {
+//     const refreshToken = req.cookies.refreshToken;
+//     if (!refreshToken) return res.sendStatus(401);
+
 //     const decoded = verifyRefreshToken(refreshToken);
 
-//     const session = await prisma.refreshSession.findUnique({
-//       where: { refreshToken },
+//     const session = await prisma.refreshSession.findFirst({
+//       where: {
+//         refreshToken,
+//         revokedAt: null,
+//         userId: decoded.userId,
+//       },
 //       include: { user: true },
 //     });
 
-//     if (!session || session.userId !== decoded.userId) {
-//       return res.sendStatus(403);
-//     }
+//     if (!session) return res.sendStatus(403);
 
-//     const newAccessToken = generateAccessToken({
-//       userId: decoded.userId,
+//     await prisma.refreshSession.update({
+//       where: { id: session.id },
+//       data: { revokedAt: new Date() },
 //     });
 
-//     res.json({ accessToken: newAccessToken,
+//     const newRefreshToken = generateRefreshToken({
+//       userId: session.user.id,
+//     });
+
+//     await prisma.refreshSession.create({
+//       data: {
+//         userId: session.user.id,
+//         refreshToken: newRefreshToken,
+//       },
+//     });
+
+//     const newAccessToken = generateAccessToken({
+//       userId: session.user.id,
+//     });
+
+//     res.cookie("refreshToken", newRefreshToken, {
+//       httpOnly: true,
+//       secure: process.env.NODE_ENV === "production",
+//       sameSite: "lax",
+//       path: "/api/auth/refresh",
+//     });
+
+//     res.json({
+//       accessToken: newAccessToken,
 //       user: {
 //         id: session.user.id,
 //         name: session.user.name,
 //         email: session.user.email,
-//       }
-//      });
+//       },
+//     });
 //   } catch (err) {
 //     return res.sendStatus(403);
 //   }
@@ -219,13 +159,66 @@ router.post("/logout", async (req, res) => {
 //   const refreshToken = req.cookies.refreshToken;
 
 //   if (refreshToken) {
-//     await prisma.refreshSession.deleteMany({
+//     await prisma.refreshSession.updateMany({
 //       where: { refreshToken },
+//       data: { revokedAt: new Date() },
 //     });
 //   }
 
-//   res.clearCookie("refreshToken");
-//   res.json({ message: "Logged out" });
+//   res.clearCookie("refreshToken", {
+//     path: "/api/auth/refresh",
+//   });
+
+//   res.sendStatus(204);
 // });
+
+
+
+
+
+
+
+router.post("/refresh", async (req, res) => {
+  console.log("Cookies in refresh:", req.cookies);
+
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) return res.sendStatus(401);
+
+  try {
+    const decoded = verifyRefreshToken(refreshToken);
+
+    const session = await prisma.refreshSession.findUnique({
+      where: { refreshToken },
+    });
+
+    if (!session || session.userId !== decoded.userId) {
+      return res.sendStatus(403);
+    }
+
+    const newAccessToken = generateAccessToken({
+      userId: decoded.userId,
+    });
+
+    res.json({ accessToken: newAccessToken,
+     
+     });
+  } catch (err) {
+    return res.sendStatus(403);
+  }
+});
+
+
+router.post("/logout", async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+
+  if (refreshToken) {
+    await prisma.refreshSession.deleteMany({
+      where: { refreshToken },
+    });
+  }
+
+  res.clearCookie("refreshToken");
+  res.json({ message: "Logged out" });
+});
 
 export default router;
