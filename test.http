@@ -1,0 +1,174 @@
+### BASE URL
+@baseUrl = http://localhost:3036
+
+
+### REGISTER USER
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test1",
+  "email": "test1@test.com",
+  "password": "123456"
+}
+
+
+### LOGIN (SETS REFRESH TOKEN COOKIE)
+### ===============================
+# Copy accessToken from response and paste below
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test1@test.com",
+  "password": "123456"
+}
+
+
+### ===============================
+### SET ACCESS TOKEN (MANUAL)
+### ===============================
+@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc2Mjg5OSwiZXhwIjoxNzY3NzYyOTU5fQ.RkFv4nYqBARapQgzW4DfwSrGr7Z3dRX2IkUTph86KrDwcpErxnUwQ0MUrZrhRGHzOBm4HJx_rTxlcbgleL0u_YMzkkz_cVgek6RR7Hd0-Bi0Dp4yfCb1r9Kw5mf5JVECJKsZFQxfhe-HwS3LkF81bEXf4pi3lLA6B-eNQ_v-uwd1-YnlVYcgPvYHh9yZik_FPdwNKFrmlMa3v_MlnIsUY3msV9AHeD9iHAOTiheft56_9fN9UA2eGC-oKSbk3YyDVDEPQQBBsvdy7-xdKgaw4NxwdoXMhFPzxacVQL1VxAgSMQUF4_zsD5nd56WxXguoVuGHYi6EbpzaO-_nS8neKw
+### GET ALL TODOS (VERIFY ACCESS TOKEN)
+### ===============================
+GET {{baseUrl}}/todos
+Authorization: Bearer {{accessToken}}
+### ===============================
+### CREATE TODO
+### ===============================
+POST {{baseUrl}}/todos
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "get"
+}
+
+
+### ===============================
+### GET TODO BY ID
+### ===============================
+GET {{baseUrl}}/todos/1
+Authorization: Bearer {{accessToken}}
+
+
+### ===============================
+### UPDATE TODO
+### ===============================
+PUT {{baseUrl}}/todos/1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "title": "update"
+}
+
+
+### ===============================
+### DELETE TODO
+### ===============================
+DELETE {{baseUrl}}/todos/1
+Authorization: Bearer {{accessToken}}
+
+
+### ===============================
+### REFRESH ACCESS TOKEN (USES COOKIE)
+### ===============================
+# No headers
+# No body
+POST {{baseUrl}}/api/auth/refresh
+Cookie: refreshToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc2MjY3MCwiZXhwIjoxNzY3NzYzMDkwfQ.pMEN5pjNr4kK2Vc7IMvnoX5O8SLy61xFaeFN3zcD1Ytz5CaJXIWUuZMIz3mphgeXlYMQWsKxFphT1feTCmZzRPHW3f5ppHUHNZLgO4T2mPj7063u0Ql4BGf1B1jaDrSuGzY0xjNUUS2CEqmx8KdQWmVXtDgit2UYLZmEoSSKVpU8FHp8nDD6WbKLtu2j7jwiefK3J8php-LnTsNjm7-KV83GC9nF5MlNcJypmphz_ltTufRaLzYAS-tDTcMenOpVSXhzVuMD1-jpAc3hUeveJFdvewzjh5emy-uBFPgiI-uN2XEHMZxTNg-zj4EbTTc98cKbX1O3TVrTCOO3y-t2lQ
+
+### ===============================
+### LOGOUT (INVALIDATES REFRESH TOKEN)
+### ===============================
+POST {{baseUrl}}/api/auth/logout
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### Base URL
+# @baseUrl = http://localhost:3036
+
+# ### REGISTER USER
+# POST {{baseUrl}}/api/auth/register
+# Content-Type: application/json
+
+# {
+#   "name": "Test1",
+#   "email": "test1@test.com",
+#   "password": "123456"
+# }
+
+# ### LOGIN (use the same email you registered)
+# POST {{baseUrl}}/api/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "test1@test.com",
+#   "password": "123456"
+# }
+
+
+# ### Get all todos
+# GET {{baseUrl}}/todos
+# Content-Type: application/json
+
+
+# ### Get todo by ID
+# GET {{baseUrl}}/todos/1
+# Content-Type: application/json
+
+
+# ### Create a new todo
+# POST {{baseUrl}}/todos
+# Content-Type: application/json
+
+# {
+#   "title": "get"
+# }
+
+
+# ### Update an existing todo
+# PUT {{baseUrl}}/todos/1
+# Content-Type: application/json
+
+# {
+#   "title": "update"
+# }
+
+
+# ### Delete a todo
+# DELETE {{baseUrl}}/todos/1
+# Content-Type: application/json

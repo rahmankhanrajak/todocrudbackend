@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Todo {
+  id    Int    @id @default(autoincrement())
+  title String @db.VarChar(255)
+
+  @@map("todos")
+}
+
+model User {
+  id           Int               @id @default(autoincrement())
+  name         String            @db.VarChar(255)
+  email        String            @unique @db.VarChar(255)
+  passwordHash String            @db.VarChar(255)
+
+  sessions     RefreshSession[]
+
+  @@map("users")
+}
+
+model RefreshSession {
+  id           Int      @id @default(autoincrement())
+  refreshToken String   @unique @db.VarChar(500)
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userAgent    String?  @db.VarChar(255)
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@map("refresh_sessions")
+}
