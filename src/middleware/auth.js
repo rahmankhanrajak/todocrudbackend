@@ -11,10 +11,8 @@ export const protect = (req, res, next) => {
 
   try {
     const decoded = verifyAccessToken(token);
-
     req.userId = decoded.userId;
     req.user = decoded;
-
     next();
   } catch (err) {
     console.error("Access token error:", err.message);

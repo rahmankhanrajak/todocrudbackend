@@ -79,7 +79,7 @@ Authorization: Bearer {{accessToken}}
 # No headers
 # No body
 POST {{baseUrl}}/api/auth/refresh
-Cookie: refreshToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzc4NzAzNywiZXhwIjoxNzY3Nzg3NDU3fQ.IEOsOdn_I2TRE2AXR2Kry-R-36mg3w8m95z31EeOL_4rsbeQWqefwZIF38aah5-up1EFAjoVApUm7ZeeXY8cNIyKc0pisjnd_sJgLw3vl5DhnKd4uBTSB9nDLg9CPdp2L6JkQYADBkzCzffXnHLi6CkFtgj4QBcpI_5f1SHI6Tsr6sM8AJdCOaloFFVJfIoOVDWaxlneskI0j6TVD0o00Rjh5g2XzJ7BZbHXhGEX78VHWxIzij2S4nEZFNO2znJwEMsmypGqJ__kjBy9sPtV376EVHoJSNEi9dARrAgjteCCLF4Oe3W9fMpOTLzlyBMwEMIlX_RYgnHKjQHPbOrV-w
+Cookie: refreshToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2Nzk0MTM5MiwiZXhwIjoxNzY3OTQxODEyfQ.prxe-pO-c8TvVPWsmsKrZhEU5sIwGVgdBNmfjqVVMEqWIz_onai5Fh4o87JyRB3GosTfDPwmtIJriEPVRqcjcGAIlQ0bqW3-92BTcc2_brGJJJAFiMC-ESiFg_5v4A91hjZ9gFJxMp5zMG7Du-9-KIPNXn6RptHd4JHdLDSE-FxBCDKDf7OhAfjWaz323t578Yuab4xYamMMmVN9-xGYV9QSpVSRMZ4CfAJ0EikWgpLhLtIiQoJy86Zz8JgcyfybsBEn0Rog_oikairFDWZIKdccnajUEUtotuFt5pcuJvFxvpo2eq2881WCApdwdIsEST48qm9fnZM5zMH73Rg8GQ
 
 ### ===============================
 ### LOGOUT (INVALIDATES REFRESH TOKEN)
